@@ -1,11 +1,5 @@
--- Sieve of Eratosthenes
+import Primes (primes)
 
-filter_div :: (Integral a) => a -> [a] -> [a]
-filter_div n seq = filter (\x -> x `mod` n /= 0) seq
-sieve' :: (Integral a) => [a] -> [a]
-sieve' seq = (head seq):(sieve' (filter_div (head seq) (tail seq)))
-
-primes = sieve' [2..]
 largest_divisible n seq m 
     | n >= p = if n `mod` p == 0 
 		then largest_divisible (n `div` p) (tail seq) p
