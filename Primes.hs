@@ -1,5 +1,5 @@
 module Primes 
-( primes, factorize'
+( primes, primes2, factorize'
 ) where
 
 -- Sieve of Eratosthenes
@@ -10,6 +10,11 @@ sieve' seq = (head seq):(sieve' (filter_div (head seq) (tail seq)))
 
 primes = 2:(sieve' [3,5..])
 
+is_prime :: Integer -> Bool
+is_prime n = let nsqrt = floor (sqrt $ fromIntegral n) in
+    dropWhile (\x -> n `mod` x /= 0) [3,5..nsqrt+2] == []
+
+primes2 = 2:3:(filter is_prime [5,7..])
 fstep m (p:t) acc =
   if m `mod` p == 0
     then fstep (div m p) (p:t) (p:acc)
